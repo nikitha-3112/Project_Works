@@ -3,11 +3,12 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import *
 
+
 class MainWindow(QMainWindow):
-    def __init__(self):
-        super(MainWindow, self).__init__()
+    def init(self,*args, **kwargs):
+        super(MainWindow, self).init(*args, **kwargs)
         self.browser = QWebEngineView()
-        self.browser.setUrl(QUrl('http://google.com'))
+        self.browser.setUrl(QUrl('file:///C:/Users/Mohanrao/OneDrive/Desktop/Oop2020/boomer1.html.html'))
         self.setCentralWidget(self.browser)
         self.showMaximized()
 
@@ -15,22 +16,21 @@ class MainWindow(QMainWindow):
         navbar = QToolBar()
         self.addToolBar(navbar)
 
-        back_button = QAction('Back', self)
-        back_button.triggered.connect(self.browser.back)
-        navbar.addAction(back_button)
+        back_btn = QAction('Back', self)
+        back_btn.triggered.connect(self.browser.back)
+        navbar.addAction(back_btn)
 
-        forward_button = QAction('Forward', self)
-        forward_button.triggered.connect(self.browser.forward)
-        navbar.addAction(forward_button)
+        forward_btn = QAction('Forward', self)
+        forward_btn.triggered.connect(self.browser.forward)
+        navbar.addAction(forward_btn)
 
-        reload_button = QAction('Reload', self)
-        reload_button.triggered.connect(self.browser.reload)
-        navbar.addAction(reload_button)
+        reload_btn = QAction('Reload', self)
+        reload_btn.triggered.connect(self.browser.reload)
+        navbar.addAction(reload_btn)
 
-        home_button = QAction('Home', self)
-        home_button.triggered.connect(self.navigate_home)
-        navbar.addAction(home_button)
-
+        home_btn = QAction('Home', self)
+        home_btn.triggered.connect(self.navigate_home)
+        navbar.addAction(home_btn)
         self.url_bar = QLineEdit()
         self.url_bar.returnPressed.connect(self.navigate_to_url)
         navbar.addWidget(self.url_bar)
@@ -39,20 +39,20 @@ class MainWindow(QMainWindow):
 
 
 
+
     def navigate_home(self):
-        self.browser.setUrl(QUrl('http://google.com'))
+        self.browser.setUrl(QUrl('file:///C:/Users/Mohanrao/OneDrive/Desktop/Oop2020/boomer1.html.html'))
 
     def navigate_to_url(self):
         url = self.url_bar.text()
         self.browser.setUrl(QUrl(url))
 
+
     def update_url(self, q):
         self.url_bar.setText(q.toString())
 
 
-
-
 app = QApplication(sys.argv)
-QApplication.setApplicationName('Web_Browser')
+QApplication.setApplicationName('GROUP-4')
 window = MainWindow()
 app.exec_()
